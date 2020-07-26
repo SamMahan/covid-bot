@@ -21,3 +21,7 @@
 $router->get('/test', function() use ($router) {
     return "hey! I'm here";
 });
+
+$router->get('/', function() use ($router) {
+    return "hey! I'm here";
+});
