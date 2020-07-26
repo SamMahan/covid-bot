@@ -15,9 +15,9 @@
     // return $router->app->version();
 $router->post('/' . env('BOT_TOKEN'), ['uses' => 'Controller@route']);
 
-$router->get('/', function () use ($router) {
-    return "HEY!";
-});
+// $router->get('/', function () use ($router) {
+    // return "HEY!";
+// });
 
 $router->get('/test', function () use ($router) {
     return "HEY!";
