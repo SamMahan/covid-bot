@@ -12,16 +12,14 @@ class Controller extends BaseController
         $this->validate($request, [
             'message' => 'required',
         ]);
-
         $message = $request->input('message');
         if($this->checkCommand('get-country', $message)) $this->getCountry();
-
     }
 
     //handler
     private function getCountry($request) {
         $message = $request->input('message');
-        $split2 = split(' ', $message['text']);
+        $split = split(' ', $message['text']);
         $countryData = $this->request('country/code', ['code' => $split[1]]);
         if (sizeof($countryData) < 1 ) {
             $this->sendMessage('sorry, that country was not found');
@@ -42,10 +40,9 @@ class Controller extends BaseController
     {
         $chat = $message['text'];
         
-        $append = ($chat['type'] === 'private') ? '' : '@' . env('BOT_NAME', 'covidnumbersbot');
+        $append = ($chat['type'] === 'private') ? '' : '@' . env('BOT_NAME', 'covid_watch_bot');
         $searchText = $searchText . $append;
         if (str_contains($message['text'], $searchText)) return true;
-        
         return false;
     }
 
@@ -61,7 +58,7 @@ class Controller extends BaseController
 
         $request->setHeaders(array(
             'x-rapidapi-host' => 'covid-19-data.p.rapidapi.com',
-            'x-rapidapi-key' => '7714065936mshe1c1f6cad14832bp1e9048jsn759c01963816'
+            'x-rapidapi-key' => env('RAPIDAPI_KEY')
         ));
 
         $client->enqueue($request)->send();
