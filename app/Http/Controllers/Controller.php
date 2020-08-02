@@ -14,7 +14,7 @@ class Controller extends BaseController
         ]);
         $message = $request->input('message');
         $this->sendMessage('input received');
-        if($this->checkCommand('get-country', $message)) $this->getCountry();
+        if($this->checkCommand('getcountry', $message)) $this->getCountry();
     }
 
     //handler
