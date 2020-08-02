@@ -10,6 +10,7 @@ class Controller extends BaseController
 
     public function route(Request $request)
     {
+        try{
         error_log("HERE, AT ROUTE");
         $botToken = $request->input('botkey');
         if ($botToken != env('BOT_TOKEN')) {
@@ -22,6 +23,9 @@ class Controller extends BaseController
         $message = $request->input('message');
         $this->sendMessage('input received');
         if($this->checkCommand('getcountry', $message)) $this->getCountry();
+        } catch(\Throwable $err) {
+            print_r($err);
+        }
     }
 
     //handler
