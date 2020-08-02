@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 
 class Controller extends BaseController
 {
@@ -10,12 +11,17 @@ class Controller extends BaseController
     public function route(Request $request)
     {
         error_log("HERE, AT ROUTE");
-        $this->validate($request, [
-            'message' => 'required',
-        ]);
-        $message = $request->input('message');
-        $this->sendMessage('input received');
-        if($this->checkCommand('getcountry', $message)) $this->getCountry();
+        $botToken = $request->input('botkey');
+        if ($botToken != env('BOT_TOKEN')) {
+            return "NOT ALLOWED";
+        }
+        return "ALLOWED";
+        // $this->validate($request, [
+        //     'message' => 'required',
+        // ]);
+        // $message = $request->input('message');
+        // $this->sendMessage('input received');
+        // if($this->checkCommand('getcountry', $message)) $this->getCountry();
     }
 
     //handler
