@@ -13,15 +13,15 @@ class Controller extends BaseController
         error_log("HERE, AT ROUTE");
         $botToken = $request->input('botkey');
         if ($botToken != env('BOT_TOKEN')) {
-            return "NOT ALLOWED";
+            return;
         }
-        return "ALLOWED";
-        // $this->validate($request, [
-        //     'message' => 'required',
-        // ]);
-        // $message = $request->input('message');
-        // $this->sendMessage('input received');
-        // if($this->checkCommand('getcountry', $message)) $this->getCountry();
+        // return "ALLOWED";
+        $this->validate($request, [
+            'message' => 'required',
+        ]);
+        $message = $request->input('message');
+        $this->sendMessage('input received');
+        if($this->checkCommand('getcountry', $message)) $this->getCountry();
     }
 
     //handler
