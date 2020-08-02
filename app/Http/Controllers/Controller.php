@@ -26,9 +26,9 @@ class Controller extends BaseController
             $this->sendMessage('sorry, that country was not found');
         }
 
-        $countryStats = $countryData[0]['provinces'][0];
+        $countryStats = $countryData[0];
 
-        $text = "Case Statistics for " . $countryStats['proince'] . ' \n ';
+        $text = "Case Statistics for " . $countryStats['province'] . ' \n ';
         $text.= "Total Confirmed Cases: " . $countryStats['confirmed'] . '\n';
         $text .= "Total Recovered Cases" . $countryStats['recovered'] . '\n';
         $text .= 'Total Current Active Cases' . $countryStats['active'] . '\n';
