@@ -9,6 +9,7 @@ class Controller extends BaseController
 
     public function route(Request $request)
     {
+        error_log("HERE, AT ROUTE");
         $this->validate($request, [
             'message' => 'required',
         ]);
