@@ -13,6 +13,7 @@ class Controller extends BaseController
             'message' => 'required',
         ]);
         $message = $request->input('message');
+        $this->sendMessage('input received');
         if($this->checkCommand('get-country', $message)) $this->getCountry();
     }
 
