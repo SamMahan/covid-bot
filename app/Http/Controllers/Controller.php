@@ -59,14 +59,14 @@ class Controller extends BaseController
     }
 
     private function request($endpoint, $params) {
-        $client = new http\Client;
-        $request = new http\Client\Request;
+        $client = new \http\Client;
+        $request = new \http\Client\Request;
 
         $params['format'] = 'json';
 
         $request->setRequestUrl('https://covid-19-data.p.rapidapi.com/'.$endpoint);
         $request->setRequestMethod('GET');
-        $request->setQuery(new http\QueryString($params));
+        $request->setQuery(new \http\QueryString($params));
 
         $request->setHeaders(array(
             'x-rapidapi-host' => 'covid-19-data.p.rapidapi.com',
@@ -85,8 +85,8 @@ class Controller extends BaseController
             'text' => $responseText
         ];
 
-        $client = new http\Client;
-        $request = new http\Client\Request;
+        $client = new \http\Client;
+        $request = new \http\Client\Request;
 
         $request->setRequestUrl('https://api.telegram.org/bot' + env('BOT_TOKEN') + '/sendMessage', $params);
         $request->setRequestMethod('POST');
