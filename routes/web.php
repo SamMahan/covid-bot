@@ -14,6 +14,7 @@
 
     // return $router->app->version();
 $router->get('/', ['uses' => 'Controller@route']);
+$router->post('/', ['uses' => 'Controller@route']);
 
 // $router->get('/', function () use ($router) {
     // return "HEY!";
