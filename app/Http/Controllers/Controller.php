@@ -21,7 +21,7 @@ class Controller extends BaseController
             'message' => 'required',
         ]);
         $message = $request->input('message');
-        $this->sendMessage('input received');
+        $this->sendMessage($message,'input received');
         if($this->checkCommand('getcountry', $message)) $this->getCountry();
         } catch(\Throwable $err) {
             print_r($err);
@@ -34,7 +34,7 @@ class Controller extends BaseController
         $split = split(' ', $message['text']);
         $countryData = $this->request('country/code', ['code' => $split[1]]);
         if (sizeof($countryData) < 1 ) {
-            $this->sendMessage('sorry, that country was not found');
+            $this->sendMessage($message, 'sorry, that country was not found');
         }
 
         $countryStats = $countryData[0];
