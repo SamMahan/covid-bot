@@ -107,11 +107,11 @@ class Controller extends BaseController
         ];
         if (is_array($keyboard)) $params['reply_markup'] = $keyboard;
         if ($sendReply) $params['reply_to_message_id'] = $message['message_id'];
-
+        $params = Unirest\Request\Body::json($params);
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
             [], 
-            json_encode($params)
+            $params
         );
     }
 }
