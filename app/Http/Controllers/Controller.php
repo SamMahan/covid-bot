@@ -35,7 +35,7 @@ class Controller extends BaseController
         $countryList = $this->request('help/countries', []);
         $keyboard = [];
         foreach ($countryList as $country) {
-            $keyboard = makeKey($country->name);
+            $keyboard = $this->makeKey($country->name);
         }
         $keyboardObj = [
             'keyboard' => $keyboard,
