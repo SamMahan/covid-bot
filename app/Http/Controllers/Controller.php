@@ -40,7 +40,6 @@ class Controller extends BaseController
         }
 
         $countryStats = $countryData[0];
-        error_log(print_r($countryStats, true));
         $text = "Case Statistics for " . $countryStats->country . ' \n ';
         $text .= "Total Confirmed Cases: " . $countryStats->confirmed . '\n';
         $text .= "Total Recovered Cases" . $countryStats->recovered . '\n';
@@ -69,7 +68,6 @@ class Controller extends BaseController
         );
 
         $response = Unirest\Request::get('https://covid-19-data.p.rapidapi.com/'. $endpoint, $headers, $params);
-        error_log(print_r($response, true));
         return $response->body;
     }
 
@@ -87,5 +85,6 @@ class Controller extends BaseController
             [], 
             $params
         );
+        error_log(print_r($response, true));
     }
 }
