@@ -33,6 +33,7 @@ class Controller extends BaseController
     private function getCountryKeyboard($request) {
         $message = $request->input('message');
         $countryList = $this->request('help/countries', []);
+        
         $keyboard = [];
 
         foreach ($countryList as $country) {
