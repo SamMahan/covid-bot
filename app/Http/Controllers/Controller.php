@@ -41,7 +41,7 @@ class Controller extends BaseController
 
         $countryStats = $countryData[0];
         error_log(print_r($countryStats, true));
-        $text = "Case Statistics for " . $countryStats->province . ' \n ';
+        $text = "Case Statistics for " . $countryStats->country . ' \n ';
         $text .= "Total Confirmed Cases: " . $countryStats->confirmed . '\n';
         $text .= "Total Recovered Cases" . $countryStats->recovered . '\n';
         $text .= 'Total Current Active Cases' . $countryStats->active . '\n';
