@@ -67,7 +67,7 @@ class Controller extends BaseController
             'x-rapidapi-key' => env('RAPIDAPI_KEY')
         );
 
-        $response = Unirest\Request::get('https://covid-19-data.p.rapidapi.com/'.$endpoint, $headers, $params);
+        $response = Unirest\Request::get('https://covid-19-data.p.rapidapi.com/'. $endpoint, $headers, $params);
 
         return $response->body;
     }
@@ -79,7 +79,7 @@ class Controller extends BaseController
         ];
 
         $response = Unirest\Request::post(
-            'https://api.telegram.org/bot' + env('BOT_TOKEN') + '/sendMessage', 
+            'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
             [], 
             $params
         );
