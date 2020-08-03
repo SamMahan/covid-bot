@@ -107,7 +107,7 @@ class Controller extends BaseController
             'chat_id' => $message['chat']['id'],
             'text' => $responseText
         ];
-        if (is_array($keyboard)) $params['reply_markup'] = $keyboard;
+        // if (is_array($keyboard)) $params['reply_markup'] = $keyboard;
         if ($sendReply) $params['reply_to_message_id'] = $message['message_id'];
         $headers = array('Accept' => 'application/json');
         // $params = Unirest\Request\Body::json($params);
