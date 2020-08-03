@@ -34,15 +34,18 @@ class Controller extends BaseController
         $message = $request->input('message');
         $countryList = $this->request('help/countries', []);
         $keyboard = [];
+
         foreach ($countryList as $country) {
             $keyboard = $this->makeKey($country->name);
         }
+
         $keyboardObj = [
             'keyboard' => $keyboard,
             'resize_keyboard' => true,
             'one_time_keyboard' => true,
             'selective' => true
         ];
+        
         $this->sendMessage($message, 'working', true, $keyboardObj);
     }
 
