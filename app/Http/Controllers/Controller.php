@@ -23,7 +23,7 @@ class Controller extends BaseController
         ]);
         $message = $request->input('message');
         $this->sendMessage($message,'input received');
-        if($this->checkCommand('getcountry', $message)) $this->getCountry();
+        if($this->checkCommand('getcountry', $message)) $this->getCountry($request);
         } catch(\Throwable $err) {
             error_log(print_r($err, true));
         }
