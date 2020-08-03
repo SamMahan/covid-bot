@@ -73,7 +73,7 @@ class Controller extends BaseController
 
     private function sendMessage($message, $responseText) {
         $params = [
-            'chatId' => $message['chat']['id'],
+            'chat_id' => $message['chat']['id'],
             'text' => $responseText
         ];
         error_log('responding');
