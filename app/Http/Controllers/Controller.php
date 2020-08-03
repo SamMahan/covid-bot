@@ -32,7 +32,8 @@ class Controller extends BaseController
     //handler
     private function getCountry($request) {
         $message = $request->input('message');
-        $split = split(' ', $message['text']);
+        
+        $split = str_split(' ', $message['text']);
         $countryData = $this->request('country/code', ['code' => $split[1]]);
         if (sizeof($countryData) < 1 ) {
             $this->sendMessage($message, 'sorry, that country was not found');
