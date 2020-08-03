@@ -40,11 +40,11 @@ class Controller extends BaseController
         }
 
         $countryStats = $countryData[0];
-        $text = "Case Statistics for " . $countryStats->country . ' \n ';
-        $text .= "Total Confirmed Cases: " . $countryStats->confirmed . '\n';
-        $text .= "Total Recovered Cases" . $countryStats->recovered . '\n';
-        $text .= 'Total Current Critical Cases' . $countryStats->critical . '\n';
-        $text .= 'Total Deaths' . $countryStats->deaths;
+        $text = "Case Statistics for {$countryStats->country} \n ";
+        $text .= "Total Confirmed Cases: {$countryStats->confirmed} \n";
+        $text .= "Total Recovered Cases: {$countryStats->recovered} \n";
+        $text .= "Total Current Critical Cases: {$countryStats->critical} \n";
+        $text .= "Total Deaths: {$countryStats->deaths}";
 
         $this->sendMessage($message, $text);
     }
