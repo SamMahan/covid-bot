@@ -69,7 +69,7 @@ class Controller extends BaseController
         );
 
         $response = Unirest\Request::get('https://covid-19-data.p.rapidapi.com/'. $endpoint, $headers, $params);
-
+        error_log(print_r($response, true));
         return $response->body;
     }
 
