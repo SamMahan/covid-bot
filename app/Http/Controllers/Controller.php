@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Unirest;
 
 class Controller extends BaseController
 {
@@ -59,24 +60,16 @@ class Controller extends BaseController
     }
 
     private function request($endpoint, $params) {
-        $client = new \http\Client;
-        $request = new \http\Client\Request;
-
         $params['format'] = 'json';
 
-        $request->setRequestUrl('https://covid-19-data.p.rapidapi.com/'.$endpoint);
-        $request->setRequestMethod('GET');
-        $request->setQuery(new \http\QueryString($params));
-
-        $request->setHeaders(array(
+        $headers = array(
             'x-rapidapi-host' => 'covid-19-data.p.rapidapi.com',
             'x-rapidapi-key' => env('RAPIDAPI_KEY')
-        ));
+        );
 
-        $client->enqueue($request)->send();
-        $response = $client->getResponse();
+        $response = Unirest\Request::get('https://covid-19-data.p.rapidapi.com/'.$endpoint, $headers, $params);
 
-        return $response->getBody();
+        return $response->body;
     }
 
     private function sendMessage($message, $responseText) {
@@ -85,12 +78,10 @@ class Controller extends BaseController
             'text' => $responseText
         ];
 
-        $client = new \http\Client;
-        $request = new \http\Client\Request;
-
-        $request->setRequestUrl('https://api.telegram.org/bot' + env('BOT_TOKEN') + '/sendMessage', $params);
-        $request->setRequestMethod('POST');
-    
-        $client->enqueue($request)->send();
+        $response = Unirest\Request::post(
+            'https://api.telegram.org/bot' + env('BOT_TOKEN') + '/sendMessage', 
+            [], 
+            $params
+        );
     }
 }
