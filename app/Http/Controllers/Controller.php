@@ -51,7 +51,7 @@ class Controller extends BaseController
 
     private function checkCommand($searchText, $message)
     {
-        $chat = $message['text'];
+        $chat = $message['chat'];
         
         $append = ($chat['type'] === 'private') ? '' : '@' . env('BOT_NAME', 'covid_watch_bot');
         $searchText = $searchText . $append;
