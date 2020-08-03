@@ -65,7 +65,7 @@ class Controller extends BaseController
 
         $headers = array(
             'x-rapidapi-host' => 'covid-19-data.p.rapidapi.com',
-            'x-rapidapi-key' => env('RAPIDAPI_KEY')
+            'x-rapidapi-key' => env('RAPID_API_KEY')
         );
 
         $response = Unirest\Request::get('https://covid-19-data.p.rapidapi.com/'. $endpoint, $headers, $params);
