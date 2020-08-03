@@ -37,6 +37,7 @@ class Controller extends BaseController
         $keyboard = [];
 
         foreach ($countryList as $country) {
+            error_log(print_r($country, true));
             $keyboard = $this->makeKey($country->name);
         }
 
