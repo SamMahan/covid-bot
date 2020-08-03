@@ -33,7 +33,7 @@ class Controller extends BaseController
     private function getCountry($request) {
         $message = $request->input('message');
         
-        $split = str_split(' ', $message['text']);
+        $split = explode(' ', $message['text']);
         $countryData = $this->request('country/code', ['code' => $split[1]]);
         if (sizeof($countryData) < 1 ) {
             $this->sendMessage($message, 'sorry, that country was not found');
@@ -42,7 +42,7 @@ class Controller extends BaseController
         $countryStats = $countryData[0];
 
         $text = "Case Statistics for " . $countryStats['province'] . ' \n ';
-        $text.= "Total Confirmed Cases: " . $countryStats['confirmed'] . '\n';
+        $text .= "Total Confirmed Cases: " . $countryStats['confirmed'] . '\n';
         $text .= "Total Recovered Cases" . $countryStats['recovered'] . '\n';
         $text .= 'Total Current Active Cases' . $countryStats['active'] . '\n';
         $text .= 'Total Deaths' . $countryStats['deaths'];
@@ -78,6 +78,9 @@ class Controller extends BaseController
             'chatId' => $message['chat']['id'],
             'text' => $responseText
         ];
+        error_log('responding');
+
+        error_log(print_r($message, true));
 
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
