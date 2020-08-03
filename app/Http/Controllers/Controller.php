@@ -37,7 +37,6 @@ class Controller extends BaseController
         $keyboard = [];
 
         foreach ($countryList as $country) {
-            error_log(print_r($country, true));
             $keyboard = $this->makeKey($country->name);
         }
 
@@ -47,6 +46,7 @@ class Controller extends BaseController
             'one_time_keyboard' => true,
             'selective' => true
         ];
+        error_log(print_r($keyboardObj, true));
 
         $this->sendMessage($message, 'working', true, $keyboardObj);
     }
