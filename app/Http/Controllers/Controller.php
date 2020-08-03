@@ -12,7 +12,6 @@ class Controller extends BaseController
     public function route(Request $request)
     {
         try{
-        error_log("HERE, AT ROUTE");
         $botToken = $request->input('botkey');
         if ($botToken != env('BOT_TOKEN')) {
             return;
@@ -23,10 +22,37 @@ class Controller extends BaseController
         ]);
         $message = $request->input('message');
         $this->sendMessage($message,'input received');
-        if($this->checkCommand('getcountry', $message)) $this->getCountry($request);
+        if($this->checkCommand('getcountry', $message)) $this->getCountryKeyboard($request);
         } catch(\Throwable $err) {
             error_log(print_r($err, true));
         }
+    }
+    /**
+     * handler
+     */
+    private function getCountryKeyboard($request) {
+        $message = $request->input('message');
+        $countryList = $this->request('help/countries');
+        $keyboard = [];
+        foreach ($countryList as $country) {
+            $keyboard = makeKey($country->name);
+        }
+        $keyboardObj = [
+            'keyboard' => $keyboard,
+            'resize_keyboard' => true,
+            'one_time_keyboard' => true,
+            'selective' => true
+        ];
+        $this->sendMessage($message, 'working', true, $keyboardObj);
+    }
+
+    private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
+        $key = [
+            'text' => $keyText,
+            'request_contact' => $requestContact,
+            'request_location' => $requestLocation
+        ];
+        return $key;
     }
 
     //handler
@@ -40,7 +66,7 @@ class Controller extends BaseController
         }
 
         $countryStats = $countryData[0];
-        $text = "Case Statistics for {$countryStats->country} \n ";
+        $text = "Case Statistics for {$countryStats->country} \n";
         $text .= "Total Confirmed Cases: {$countryStats->confirmed} \n";
         $text .= "Total Recovered Cases: {$countryStats->recovered} \n";
         $text .= "Total Current Critical Cases: {$countryStats->critical} \n";
@@ -71,20 +97,18 @@ class Controller extends BaseController
         return $response->body;
     }
 
-    private function sendMessage($message, $responseText) {
+    private function sendMessage($message, $responseText, $sendReply = false, $keyboard = null) {
         $params = [
             'chat_id' => $message['chat']['id'],
             'text' => $responseText
         ];
-        error_log('responding');
-
-        error_log(print_r($message, true));
+        if (is_array($keyboard)) $params['reply_markup'] = $keyboard;
+        if ($sendReply) $params['reply_to_message_id'] = $message['message_id'];
 
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
             [], 
             $params
         );
-        error_log(print_r($response, true));
     }
 }
