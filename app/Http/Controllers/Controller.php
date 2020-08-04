@@ -53,7 +53,7 @@ class Controller extends BaseController
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
         $key = [
-            'text' => $keyText,
+             $keyText,
             // 'request_contact' => $requestContact,
             // 'request_location' => $requestLocation
         ];
