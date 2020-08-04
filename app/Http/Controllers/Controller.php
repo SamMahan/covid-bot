@@ -48,7 +48,7 @@ class Controller extends BaseController
         ];
         // error_log(print_r($keyboardObj,  true));
 
-        $this->sendMessage($message, 'working', true);
+        $this->sendMessage($message, 'working', true, $keyboard);
     }
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
@@ -111,6 +111,7 @@ class Controller extends BaseController
         if ($sendReply) $params['reply_to_message_id'] = $message['message_id'];
         $headers = array('Accept' => 'application/json');
         // $params = Unirest\Request\Body::json($params);
+        $params['keyboard'] = $keyboard; //delet this
         $params['text'] = json_encode($params);
         unset($params['reply_markup']);
         $response = Unirest\Request::post(
