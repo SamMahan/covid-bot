@@ -113,11 +113,12 @@ class Controller extends BaseController
         // $params = Unirest\Request\Body::json($params);
         
         $params['text'] = json_encode($keyboard);
-        unset($params['reply_markup']);
+        // unset($params['reply_markup']);
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
             $headers,
             $params
         );
+        error_log(print_r($response, true));
     }
 }
