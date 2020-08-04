@@ -44,7 +44,7 @@ class Controller extends BaseController
             'keyboard' => $keyboard,
             'resize_keyboard' => true,
             'one_time_keyboard' => true,
-            'selective' => false
+            'selective' => true
         ];
         //  error_log(print_r($keyboardObj,  true));
 
@@ -54,8 +54,8 @@ class Controller extends BaseController
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
         $key = [
             'text' => $keyText,
-            'request_contact' => $requestContact,
-            'request_location' => $requestLocation
+            // 'request_contact' => $requestContact,
+            // 'request_location' => $requestLocation
         ];
         return $key;
     }
