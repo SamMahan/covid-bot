@@ -111,7 +111,7 @@ class Controller extends BaseController
         if ($sendReply) $params['reply_to_message_id'] = $message['message_id'];
 
         $headers = ['Accept' => 'application/x-www-form-urlencoded'];
-        
+
         // $params['text'] = json_encode($params);
         $params1 = Unirest\Request\Body::form($params);
         error_log(print_r($params1, true));
@@ -119,7 +119,7 @@ class Controller extends BaseController
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
             $headers,
-            $params
+            $params2
         );
         error_log(print_r($response, true));
     }
