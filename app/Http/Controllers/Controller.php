@@ -9,8 +9,7 @@ use Unirest;
 class Controller extends BaseController
 {
 
-    public function route(Request $request)
-    {
+    public function route(Request $request) {
         try{
         $botToken = $request->input('botkey');
         if ($botToken != env('BOT_TOKEN')) {
@@ -38,6 +37,7 @@ class Controller extends BaseController
 
         foreach ($countryList as $country) {
             $keyboard[] = $this->makeKey($country->name);
+        break;
         }
 
         $keyboardObj = [
