@@ -119,6 +119,6 @@ class Controller extends BaseController
             $headers,
             $params1
         );
-        // error_log(print_r($response, true));
+        error_log(print_r($response, true));
     }
 }
