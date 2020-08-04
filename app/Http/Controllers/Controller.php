@@ -119,7 +119,7 @@ class Controller extends BaseController
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
             $headers,
-            $params2
+            $params1
         );
         error_log(print_r($response, true));
     }
