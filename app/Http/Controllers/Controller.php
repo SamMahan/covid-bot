@@ -39,7 +39,12 @@ class Controller extends BaseController
             $keyboard[] = $this->makeKey($country->name);
         break;
         }
-
+        $keyboard = [
+            ['7', '8', '9'],
+            ['4', '5', '6'],
+            ['1', '2', '3'],
+                 ['0']
+        ];
         $keyboardObj = [
             'keyboard' => $keyboard,
             'resize_keyboard' => true,
