@@ -104,20 +104,22 @@ class Controller extends BaseController
 
     private function sendMessage($message, $responseText, $sendReply = false, $keyboard = null) {
         $params = [
-            // 'chat_id' => $message['chat']['id'],
+            'chat_id' => $message['chat']['id'],
             'text' => $responseText
         ];
         if (is_array($keyboard)) $params['reply_markup'] = $keyboard;
         if ($sendReply) $params['reply_to_message_id'] = $message['message_id'];
-        $headers = array('Accept' => 'application/json');
-        $params['text'] = json_encode($params);
-        $params1 = Unirest\Request\Body::json($params);
+
+        $headers = ['Accept' => 'application/x-www-form-urlencoded'];
+        
+        // $params['text'] = json_encode($params);
+        $params1 = Unirest\Request\Body::form($params);
         error_log(print_r($params1, true));
         // unset($params['reply_markup']);
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
             $headers,
-            $params1
+            $params
         );
         error_log(print_r($response, true));
     }
