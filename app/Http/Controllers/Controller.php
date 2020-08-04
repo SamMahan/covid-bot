@@ -104,7 +104,7 @@ class Controller extends BaseController
 
     private function sendMessage($message, $responseText, $sendReply = false, $keyboard = null) {
         $params = [
-            'chat_id' => $message['chat']['id'],
+            // 'chat_id' => $message['chat']['id'],
             'text' => $responseText
         ];
         if (is_array($keyboard)) $params['reply_markup'] = $keyboard;
