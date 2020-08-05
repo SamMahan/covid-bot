@@ -39,9 +39,9 @@ class Controller extends BaseController
             $keyboard[] = $this->makeKey($country->name);
         break;
         }
-        $keyboard = [
-            ['dis som txt']
-        ];
+        // $keyboard = [
+        //     ['dis som txt']
+        // ];
         $keyboardObj = [
             'keyboard' => $keyboard,
             'resize_keyboard' => true,
