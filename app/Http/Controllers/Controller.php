@@ -40,10 +40,7 @@ class Controller extends BaseController
         break;
         }
         $keyboard = [
-            ['7', '8', '9'],
-            ['4', '5', '6'],
-            ['1', '2', '3'],
-                 ['0']
+            ['text' => 'dis som txt']
         ];
         $keyboardObj = [
             'keyboard' => $keyboard,
@@ -58,7 +55,7 @@ class Controller extends BaseController
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
         $key = [
-             $keyText,
+             'text'=>$keyText,
             // 'request_contact' => $requestContact,
             // 'request_location' => $requestLocation
         ];
