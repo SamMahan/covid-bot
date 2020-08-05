@@ -112,7 +112,7 @@ class Controller extends BaseController
             'chat_id' => $message['chat']['id'],
             'text' => $responseText
         ];
-        if (is_array($keyboard)) $params['reply_markup'] = $keyboard;
+        if (is_array($keyboard)) $params['reply_markup'] = json_encode($keyboard);
         if ($sendReply) $params['reply_to_message_id'] = $message['message_id'];
 
         $headers = ['Accept' => 'application/x-www-form-urlencoded'];
