@@ -23,11 +23,22 @@ class Controller extends BaseController
         $this->sendMessage($message,'input received');
         error_log(print_r($message, true));
         if($this->checkCommand('getcountry', $message)) $this->getCountryKeyboard($request);
+        if($this->checkCommand('start', $message)) $this->getStartMessage($request);
+        
         } catch(\Throwable $err) {
             error_log(print_r($err, true));
         }
     }
-
+    private function getStartMessage($request) {
+        $message = "Hey there. This is a simple bot usefd for quick access to coronavirus stats \n
+            It pulls from a free coronavirus API specified here: https://rapidapi.com/Gramzivi/api/covid-19-data \n
+            (still under construction. I hope to have it workin within the week) \n
+            Commands:\n
+            /getCountry - activates a keyboard where you can select a country. Selection of a country will automatically
+            query the API for data on that country
+        ";
+        $this->sendMessage()
+    }
     /**
      * handler
      */
@@ -58,7 +69,7 @@ class Controller extends BaseController
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
         $key = [
-             $keyText,
+             "--$keyText--",
             // 'request_contact' => $requestContact,
             // 'request_location' => $requestLocation
         ];
