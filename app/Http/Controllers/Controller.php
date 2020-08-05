@@ -48,7 +48,7 @@ class Controller extends BaseController
             'resize_keyboard' => true,
             'one_time_keyboard' => true,
             'selective' => true,
-            'force_reply' => false
+            'force_reply' => true
         ];
         //  error_log(print_r($keyboardObj,  true));
 
