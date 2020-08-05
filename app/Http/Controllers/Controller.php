@@ -21,6 +21,7 @@ class Controller extends BaseController
         ]);
         $message = $request->input('message');
         $this->sendMessage($message,'input received');
+        error_log(print_r($message, true));
         if($this->checkCommand('getcountry', $message)) $this->getCountryKeyboard($request);
         } catch(\Throwable $err) {
             error_log(print_r($err, true));
@@ -117,13 +118,10 @@ class Controller extends BaseController
 
         // $params['text'] = json_encode($params);
         $params1 = Unirest\Request\Body::form($params);
-        error_log(print_r($params1, true));
-        // unset($params['reply_markup']);
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
             $headers,
             $params1
         );
-        error_log(print_r($response, true));
     }
 }
