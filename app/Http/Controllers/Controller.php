@@ -27,6 +27,7 @@ class Controller extends BaseController
             error_log(print_r($err, true));
         }
     }
+
     /**
      * handler
      */
@@ -38,7 +39,7 @@ class Controller extends BaseController
 
         foreach ($countryList as $country) {
             $keyboard[] = $this->makeKey($country->name);
-        break;
+        // break;
         }
         // $keyboard = [
         //     ['dis som txt']
