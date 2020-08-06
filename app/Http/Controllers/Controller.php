@@ -52,7 +52,7 @@ query the API for data on that country
     private function getCountryKeyboard($request) {
         $message = $request->input('message');
         $countryList = $this->request('help/countries', []);
-
+        $userName = $message['from']['username'];
         $keyboard = [];
 
         foreach ($countryList as $country) {
@@ -63,12 +63,12 @@ query the API for data on that country
             'resize_keyboard' => true,
             // 'one_time_keyboard' => false,
             'selective' => true,
-            'force_reply' => false
+            // 'force_reply' => false
         ];
         //  error_log(print_r($keyboardObj,  true));
         // error_log(print_r($keyboardObj, true));
 
-        $this->sendMessage($message, 'working...', false, $keyboardObj);
+        $this->sendMessage($message, "@{$userName}", false, $keyboardObj);
     }
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
