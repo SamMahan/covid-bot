@@ -137,6 +137,7 @@ query the API for data on that country. \n
         $headers = ['Accept' => 'application/x-www-form-urlencoded'];
 
         // $params['text'] = json_encode($params);
+        error_log(print_r($params, true));
         $params1 = Unirest\Request\Body::form($params);
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
