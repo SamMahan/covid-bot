@@ -39,10 +39,10 @@ This is primarily a personal project designed to promote The Greater Good and th
 Use it to debunk your goofy friends who think the virus is a hoax or something idk. \n
 
 Commands:\n
-/getCountry - activates a keyboard where you can select a country. Selection of a country will automatically
-query the API for data on that country
-/
-        ";
+/getcountrykeyboard - Activates a keyboard where you can select a country. Selection of a country will automatically
+query the API for data on that country. \n
+/checkcountry - For when the keyboard isn't good enough for you and you want to type out the country name manually.\n
+/start - See this message again.";
         $this->sendMessage($request->input('message'), $message);
     }
 
