@@ -64,7 +64,7 @@ query the API for data on that country. \n
             'resize_keyboard' => true,
             'one_time_keyboard' => false,
             'selective' => true,
-            'force_reply' => true
+            'force_reply' => false
         ];
         $this->sendMessage($message, '', true, $keyboardObj);
     }
