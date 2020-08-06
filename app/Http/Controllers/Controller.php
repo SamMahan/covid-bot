@@ -88,7 +88,7 @@ query the API for data on that country
             $this->sendMessage($message, 'please supply a name with your query', true);
             return;
         }
-        $countryData = $this->request('country/code', ['code' => $split[1]]);
+        $countryData = $this->request('country', ['name' => $split[1]]);
         if (sizeof($countryData) < 1 ) {
             $this->sendMessage($message, 'sorry, that country was not found', true);
             return;
