@@ -20,15 +20,18 @@ class Controller extends BaseController
             'message' => 'required',
         ]);
         $message = $request->input('message');
-        $this->sendMessage($message,'input received');
-        error_log(print_r($message, true));
         if($this->checkCommand('getcountry', $message)) $this->getCountryKeyboard($request);
         if($this->checkCommand('start', $message)) $this->getStartMessage($request);
-        
+        if($this->checkCommand('checkcountry', $message)) $this->checkCountry($request);
         } catch(\Throwable $err) {
             error_log(print_r($err, true));
         }
     }
+
+    
+    /**
+     * handler
+     */
     private function getStartMessage($request) {
         $message = "Hey there. This is a simple bot usefd for quick access to coronavirus stats. \n
 It pulls from a free coronavirus API specified here: https://rapidapi.com/Gramzivi/api/covid-19-data. \n
@@ -38,6 +41,7 @@ Use it to debunk your goofy friends who think the virus is a hoax or something i
 Commands:\n
 /getCountry - activates a keyboard where you can select a country. Selection of a country will automatically
 query the API for data on that country
+/
         ";
         $this->sendMessage($request->input('message'), $message);
     }
@@ -68,21 +72,26 @@ query the API for data on that country
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
         $key = [
-             "$keyText",
-            // 'request_contact' => $requestContact,
-            // 'request_location' => $requestLocation
+             "/checkcountry $keyText",
         ];
         return $key;
     }
 
-    //handler
-    private function getCountry($request) {
+    /**
+     * handler
+     */
+    private function checkCountry($request) {
         $message = $request->input('message');
         
         $split = explode(' ', $message['text']);
+        if (sizeof($split) < 2) {
+            $this->sendMessage($message, 'please supply a name with your query', true);
+            return;
+        }
         $countryData = $this->request('country/code', ['code' => $split[1]]);
         if (sizeof($countryData) < 1 ) {
-            $this->sendMessage($message, 'sorry, that country was not found');
+            $this->sendMessage($message, 'sorry, that country was not found', true);
+            return;
         }
 
         $countryStats = $countryData[0];
