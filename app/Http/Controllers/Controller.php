@@ -52,6 +52,7 @@ query the API for data on that country
     private function getCountryKeyboard($request) {
         $message = $request->input('message');
         $countryList = $this->request('help/countries', []);
+        error_log(print_r($message, true));
         $userName = $message['from']['username'];
         $keyboard = [];
 
