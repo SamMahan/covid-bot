@@ -96,11 +96,11 @@ query the API for data on that country
         }
 
         $countryStats = $countryData[0];
-        $text = "Case Statistics for {number_format($countryStats->country)} \n";
-        $text .= "Total Confirmed Cases: {number_format($countryStats->confirmed)} \n";
-        $text .= "Total Recovered Cases: {number_format($countryStats->recovered)} \n";
-        $text .= "Total Current Critical Cases: {number_format($countryStats->critical)} \n";
-        $text .= "Total Deaths: {number_format($countryStats->deaths)}";
+        $text = "Case Statistics for " . number_format($countryStats->country) ." \n";
+        $text .= "Total Confirmed Cases: " . number_format($countryStats->confirmed) ."\n";
+        $text .= "Total Recovered Cases: " . number_format($countryStats->recovered) ."\n";
+        $text .= "Total Current Critical Cases: " . number_format($countryStats->critical) ."\n";
+        $text .= "Total Deaths: " . number_format($countryStats->deaths) . "\n";
 
         $this->sendMessage($message, $text, true);
     }
