@@ -20,7 +20,7 @@ class Controller extends BaseController
             'message' => 'required',
         ]);
         $message = $request->input('message');
-        if($this->checkCommand('getcountry', $message)) $this->getCountryKeyboard($request);
+        if($this->checkCommand('getcountrykeyboard', $message)) $this->getCountryKeyboard($request);
         if($this->checkCommand('start', $message)) $this->getStartMessage($request);
         if($this->checkCommand('checkcountry', $message)) $this->checkCountry($request);
         } catch(\Throwable $err) {
