@@ -20,7 +20,7 @@ class Controller extends BaseController
             'message' => 'required',
         ]);
         $message = $request->input('message');
-        if($this->checkCommand('getcountrykeyboard', $message)) $this->getCountryKeyboard($request);
+        if($this->checkCommand('getcountry', $message)) $this->getCountryKeyboard($request);
         if($this->checkCommand('start', $message)) $this->getStartMessage($request);
         if($this->checkCommand('checkcountry', $message)) $this->checkCountry($request);
         } catch(\Throwable $err) {
@@ -35,14 +35,14 @@ class Controller extends BaseController
     private function getStartMessage($request) {
         $message = "Hey there. This is a simple bot usefd for quick access to coronavirus stats. \n
 It pulls from a free coronavirus API specified here: https://rapidapi.com/Gramzivi/api/covid-19-data. \n
-This is primarily a personal project designed to promote The Greater Good and therefore I'll be working on it sporadically.\n
+This is primarily a personal project designed to promote The Greater Good and therefore I'll be Working on it sporadically.\n
 Use it to debunk your goofy friends who think the virus is a hoax or something idk. \n
-
+(still under construction. I hope to have it workin within the week) \n
 Commands:\n
-/getcountrykeyboard - Activates a keyboard where you can select a country. Selection of a country will automatically
-query the API for data on that country. \n
-/checkcountry - For when the keyboard isn't good enough for you and you want to type out the country name manually.\n
-/start - See this message again.";
+/getCountry - activates a keyboard where you can select a country. Selection of a country will automatically
+query the API for data on that country
+/
+        ";
         $this->sendMessage($request->input('message'), $message);
     }
 
@@ -50,7 +50,6 @@ query the API for data on that country. \n
      * handler
      */
     private function getCountryKeyboard($request) {
-        error_log("COUNTRY KEYBOARD SELECTED");
         $message = $request->input('message');
         $countryList = $this->request('help/countries', []);
 
@@ -62,11 +61,13 @@ query the API for data on that country. \n
         $keyboardObj = [
             'keyboard' => $keyboard,
             'resize_keyboard' => true,
-            'one_time_keyboard' => false,
+            'one_time_keyboard' => true,
             'selective' => true,
-            'force_reply' => false
+            'force_reply' => true
         ];
-        $this->sendMessage($message, 'working', $keyboardObj);
+        //  error_log(print_r($keyboardObj,  true));
+
+        $this->sendMessage($message, 'working', false, $keyboardObj);
     }
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
@@ -76,12 +77,8 @@ query the API for data on that country. \n
         return $key;
     }
 
-    /**
-     * handler
-     */
+    //handler
     private function checkCountry($request) {
-        error_log("COUNTRY SELECTED");
-
         $message = $request->input('message');
         
         $split = explode(' ', $message['text']);
@@ -89,7 +86,7 @@ query the API for data on that country. \n
             $this->sendMessage($message, 'please supply a name with your query', true);
             return;
         }
-        $countryData = $this->request('country', ['name' => $split[1]]);
+        $countryData = $this->request('country/code', ['code' => $split[1]]);
         if (sizeof($countryData) < 1 ) {
             $this->sendMessage($message, 'sorry, that country was not found', true);
             return;
@@ -102,13 +99,13 @@ query the API for data on that country. \n
         $text .= "Total Current Critical Cases: {$countryStats->critical} \n";
         $text .= "Total Deaths: {$countryStats->deaths}";
 
-        $this->sendMessage($message, $text, true);
+        $this->sendMessage($message, $text);
     }
 
     private function checkCommand($searchText, $message)
     {
         $chat = $message['chat'];
-        // error_log(print_r($chat, true));
+        
         $append = ($chat['type'] === 'private') ? '' : '@' . env('BOT_NAME', 'covid_watch_bot');
         $searchText = $searchText . $append;
         if (str_contains($message['text'], $searchText)) return true;
@@ -138,7 +135,6 @@ query the API for data on that country. \n
         $headers = ['Accept' => 'application/x-www-form-urlencoded'];
 
         // $params['text'] = json_encode($params);
-        error_log(print_r($params, true));
         $params1 = Unirest\Request\Body::form($params);
         $response = Unirest\Request::post(
             'https://api.telegram.org/bot' . env('BOT_TOKEN') . '/sendMessage', 
