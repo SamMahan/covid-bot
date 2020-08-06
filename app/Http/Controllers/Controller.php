@@ -66,7 +66,7 @@ query the API for data on that country. \n
             'selective' => true,
             'force_reply' => false
         ];
-        $this->sendMessage($message, '', $keyboardObj);
+        $this->sendMessage($message, 'working', $keyboardObj);
     }
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
