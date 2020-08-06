@@ -106,9 +106,9 @@ query the API for data on that country
     private function checkCommand($searchText, $message)
     {
         $chat = $message['chat'];
-        
-        $append = ($chat['type'] === 'private') ? '' : '@' . env('BOT_NAME', 'covid_watch_bot');
-        $searchText = $searchText . $append;
+
+        // $append = ($chat['type'] === 'private') ? '' : '@' . env('BOT_NAME', 'covid_watch_bot');
+        // $searchText = $searchText . $append;
         if (str_contains($message['text'], $searchText)) return true;
         return false;
     }
