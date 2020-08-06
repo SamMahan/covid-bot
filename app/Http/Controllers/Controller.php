@@ -66,9 +66,9 @@ query the API for data on that country
             // 'force_reply' => true
         ];
         //  error_log(print_r($keyboardObj,  true));
-        error_log(print_r($keyboardObj, true));
+        // error_log(print_r($keyboardObj, true));
 
-        $this->sendMessage($message, '', false, $keyboardObj);
+        $this->sendMessage($message, '', true, $keyboardObj);
     }
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
