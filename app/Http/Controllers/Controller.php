@@ -68,7 +68,7 @@ query the API for data on that country
         //  error_log(print_r($keyboardObj,  true));
         error_log(print_r($keyboardObj, true));
 
-        $this->sendMessage($message, , false, $keyboardObj);
+        $this->sendMessage($message, '', true, $keyboardObj);
     }
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
@@ -100,7 +100,7 @@ query the API for data on that country
         $text .= "Total Current Critical Cases: {$countryStats->critical} \n";
         $text .= "Total Deaths: {$countryStats->deaths}";
 
-        $this->sendMessage($message, true, $text);
+        $this->sendMessage($message, $countryStats, true, $text);
     }
 
     private function checkCommand($searchText, $message)
