@@ -37,7 +37,7 @@ class Controller extends BaseController
             /getCountry - activates a keyboard where you can select a country. Selection of a country will automatically
             query the API for data on that country
         ";
-        $this->sendMessage()
+        $this->sendMessage($request->input('message'), $message);
     }
     /**
      * handler
@@ -69,7 +69,7 @@ class Controller extends BaseController
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
         $key = [
-             "--$keyText--",
+             "$keyText",
             // 'request_contact' => $requestContact,
             // 'request_location' => $requestLocation
         ];
