@@ -105,6 +105,7 @@ query the API for data on that country. \n
     private function checkCommand($searchText, $message)
     {
         $chat = $message['chat'];
+        error_log(print_r($chat, true));
         $append = ($chat['type'] === 'private') ? '' : '@' . env('BOT_NAME', 'covid_watch_bot');
         $searchText = $searchText . $append;
         if (str_contains($message['text'], $searchText)) return true;
