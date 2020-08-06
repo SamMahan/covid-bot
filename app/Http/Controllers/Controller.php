@@ -53,7 +53,8 @@ query the API for data on that country
         $message = $request->input('message');
         $countryList = $this->request('help/countries', []);
         error_log(print_r($message, true));
-        $userName = $message['from']['username'];
+        $userId = $message['from']['id'];
+        $userName = $message['from']['first_name'];
         $keyboard = [];
 
         foreach ($countryList as $country) {
@@ -69,7 +70,7 @@ query the API for data on that country
         //  error_log(print_r($keyboardObj,  true));
         // error_log(print_r($keyboardObj, true));
 
-        $this->sendMessage($message, "@{$userName}", false, $keyboardObj);
+        $this->sendMessage($message, "@{$userId} ({$userName})", false, $keyboardObj);
     }
 
     private function makeKey($keyText, $requestContact = false, $requestLocation = false) {
