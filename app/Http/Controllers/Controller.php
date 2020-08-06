@@ -61,9 +61,9 @@ query the API for data on that country
         $keyboardObj = [
             'keyboard' => $keyboard,
             'resize_keyboard' => true,
-            'one_time_keyboard' => false,
-            'selective' => true,
-            'force_reply' => true
+            // 'one_time_keyboard' => false,
+            // 'selective' => true,
+            // 'force_reply' => true
         ];
         //  error_log(print_r($keyboardObj,  true));
 
