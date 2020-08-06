@@ -141,5 +141,6 @@ query the API for data on that country
             $headers,
             $params1
         );
+        error_log(print_r($response, true));
     }
 }
