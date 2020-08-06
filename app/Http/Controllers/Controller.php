@@ -66,6 +66,7 @@ query the API for data on that country
             // 'force_reply' => true
         ];
         //  error_log(print_r($keyboardObj,  true));
+        error_log(print_r($keyboardObj, true));
 
         $this->sendMessage($message, 'working', false, $keyboardObj);
     }
