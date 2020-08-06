@@ -62,8 +62,8 @@ query the API for data on that country
             'keyboard' => $keyboard,
             'resize_keyboard' => true,
             // 'one_time_keyboard' => false,
-            // 'selective' => true,
-            // 'force_reply' => true
+            'selective' => true,
+            'force_reply' => false
         ];
         //  error_log(print_r($keyboardObj,  true));
         // error_log(print_r($keyboardObj, true));
@@ -100,7 +100,7 @@ query the API for data on that country
         $text .= "Total Current Critical Cases: {$countryStats->critical} \n";
         $text .= "Total Deaths: {$countryStats->deaths}";
 
-        $this->sendMessage($message, $countryStats, true, $text);
+        $this->sendMessage($message, $text, true);
     }
 
     private function checkCommand($searchText, $message)
