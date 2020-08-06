@@ -50,6 +50,7 @@ query the API for data on that country. \n
      * handler
      */
     private function getCountryKeyboard($request) {
+        error_log("COUNTRY KEYBOARD SELECTED");
         $message = $request->input('message');
         $countryList = $this->request('help/countries', []);
 
@@ -63,7 +64,7 @@ query the API for data on that country. \n
             'resize_keyboard' => true,
             'one_time_keyboard' => false,
             'selective' => true,
-            'force_reply' => false
+            'force_reply' => true
         ];
         $this->sendMessage($message, '', true, $keyboardObj);
     }
@@ -79,6 +80,8 @@ query the API for data on that country. \n
      * handler
      */
     private function checkCountry($request) {
+        error_log("COUNTRY SELECTED");
+
         $message = $request->input('message');
         
         $split = explode(' ', $message['text']);
@@ -99,7 +102,7 @@ query the API for data on that country. \n
         $text .= "Total Current Critical Cases: {$countryStats->critical} \n";
         $text .= "Total Deaths: {$countryStats->deaths}";
 
-        $this->sendMessage($message, $text);
+        $this->sendMessage($message, $text, true);
     }
 
     private function checkCommand($searchText, $message)
