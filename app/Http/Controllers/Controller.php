@@ -36,7 +36,7 @@ class Controller extends BaseController
         $message = "Hey there. This is a simple bot usefd for quick access to coronavirus stats. \n
 It pulls from a free coronavirus API specified here: https://rapidapi.com/Gramzivi/api/covid-19-data. \n
 This is primarily a personal project designed to promote The Greater Good and therefore I'll be Working on it sporadically.\n
-Use it to debunk your goofy friends who think the virus is a hoax or something idk. \n
+
 (still under construction. I hope to have it workin within the week) \n
 Commands:\n
 /getcountrykeyboard - Activates a keyboard where you can select a country. Selection of a country will automatically
