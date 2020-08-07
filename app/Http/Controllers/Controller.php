@@ -84,7 +84,7 @@ query the API for data on that country
     private function checkCountry($request) {
         $message = $request->input('message');
         
-        $split = explode(' ', $message['text']);
+        $split = explode(' ', urlencode($message['text']));
         if (sizeof($split) < 2) {
             $this->sendMessage($message, 'please supply a name with your query', true);
             return;
@@ -96,7 +96,7 @@ query the API for data on that country
         }
 
         $countryStats = $countryData[0];
-        $text = "Case Statistics for " . number_format((float)$countryStats->country) ." \n";
+        $text = "Case Statistics for {$countryStats->country} \n";
         $text .= "Total Confirmed Cases: " . number_format((float)$countryStats->confirmed) ."\n";
         $text .= "Total Recovered Cases: " . number_format((float)$countryStats->recovered) ."\n";
         $text .= "Total Current Critical Cases: " . number_format((float)$countryStats->critical) ."\n";
