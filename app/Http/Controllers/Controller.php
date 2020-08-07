@@ -85,12 +85,12 @@ query the API for data on that country \n
     private function checkCountry($request) {
         $message = $request->input('message');
         
-        $split = explode(' ', urlencode($message['text']));
+        $split = explode(' ', $message['text']);
         if (sizeof($split) < 2) {
             $this->sendMessage($message, 'please supply a name with your query', true);
             return;
         }
-        $countryData = $this->request('country', ['name' => $split[1]]);
+        $countryData = $this->request('country', ['name' => urlencode($split[1])]);
         if (sizeof($countryData) < 1 ) {
             $this->sendMessage($message, 'sorry, that country was not found', true);
             return;
