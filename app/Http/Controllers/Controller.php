@@ -102,7 +102,7 @@ query the API for data on that country \n
         $text .= "Total Recovered Cases: " . number_format((float)$countryStats->recovered) ."\n";
         $text .= "Total Current Critical Cases: " . number_format((float)$countryStats->critical) ."\n";
         $text .= "Total Deaths: " . number_format((float)$countryStats->deaths) . "\n";
-        $text .= "Mortality Rate: " . number_format(((int) $countryStats->deaths / (int) $countryStats->confirmed) * 100) . '%';
+        $text .= "Mortality Rate: " . number_format(((int) $countryStats->deaths / (int) $countryStats->confirmed) * 100, 2) . '%';
         $this->sendMessage($message, $text, true);
     }
 
